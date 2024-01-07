@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { FaSearch } from "react-icons/fa";
 import { IoPersonSharp } from "react-icons/io5";
 import { TiHeartFullOutline } from "react-icons/ti";
+import { NavLink } from "react-router-dom";
 
 function Navbar() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -18,36 +19,49 @@ function Navbar() {
   return (
     <NavPage>
       <NavSection>
-        <div className="nevigation">
-          <div className="title">
-            <h1>FUNTAIN</h1>
-          </div>
-          <div className="navComponents">
-            <ul>
-              <li>Home</li>
-              <li>TV Shows</li>
-              <li>Movies</li>
-              <li>New & Popular</li>
-              <li>My List</li>
-            </ul>
-          </div>
-        </div>
+        <Nevigation>
+          <Title>
+            <NavLink>
+              <h1>FUNTAIN</h1>
+            </NavLink>
+          </Title>
 
-        <div className="navItems">
-          <div className="search">
+          <NavComponents>
+            <ul>
+              <li>
+                <NavLink>Home</NavLink>
+              </li>
+              <li>
+                <NavLink>TV Shows</NavLink>
+              </li>
+              <li>
+                <NavLink>Movies</NavLink>
+              </li>
+              <li>
+                <NavLink>New & Popular</NavLink>
+              </li>
+              <li>
+                <NavLink>My List</NavLink>
+              </li>
+            </ul>
+          </NavComponents>
+        </Nevigation>
+
+        <NavItems>
+          <Search>
             {isSearchOpen && (
               <div className="searchBox">
                 <input type="text" placeholder="Search....."></input>
               </div>
             )}
-            <StyledSearchIcon
+            <FaSearch
               className={isSearchOpen ? "searchIconActive" : ""}
               onClick={toggleSearch}
             />
-          </div>
+          </Search>
 
-          <div className="profile">
-            <StyledProfileIcon
+          <Profile>
+            <IoPersonSharp
               className={isAccountOpen ? "profileIconActive" : ""}
               onClick={toggleAccount}
             />
@@ -63,8 +77,8 @@ function Navbar() {
                 </div>
               </div>
             )}
-          </div>
-        </div>
+          </Profile>
+        </NavItems>
       </NavSection>
     </NavPage>
   );
@@ -83,48 +97,51 @@ const NavSection = styled.div`
   align-items: center;
   height: 4rem;
   width: 85rem;
+`;
 
-  .nevigation {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 3rem;
+const Nevigation = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  color: black;
+
+  a {
+    text-decoration: none;
+    color: black;
   }
-
-  .title {
-    font-size: 1rem;
+`;
+const Title = styled.div`
+  font-size: 1rem;
+  a {
     color: #e0142f;
-    cursor: pointer;
-    padding-left: 10px;
   }
+`;
 
-  .navComponents {
-    ul {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 1rem;
-      list-style-type: none;
-      padding: 0;
-      font-size: 1.5rem;
-      cursor: pointer;
-    }
-  }
-
-  .navItems {
+const NavComponents = styled.div`
+  ul {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 1.5rem;
-    font-size: 1.7rem;
+    gap: 1rem;
+    list-style-type: none;
+    padding: 0;
+    font-size: 1.3rem;
     cursor: pointer;
   }
+`;
 
-  .search {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+const NavItems = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+`;
+
+const Search = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   .searchIconActive {
     border: 1px solid #cccccc;
@@ -138,8 +155,8 @@ const NavSection = styled.div`
     align-items: center;
     input {
       padding-left: 8px;
-      height: 2rem;
-      width: 15rem;
+      height: 2.3rem;
+      width: 17rem;
       font-size: 1.2rem;
       border: 1px solid #cccccc;
       border-radius: 5px;
@@ -147,31 +164,41 @@ const NavSection = styled.div`
     }
   }
 
-  .profile {
-    display: flex;
-    align-items: center;
-    position: relative;
+  svg {
+    width: 3rem;
+    height: 1.8rem;
+  }
+`;
 
-    .profileBox {
-      width: 7rem;
-      height: 5rem;
-      background: white;
-      position: absolute;
-      top: 100%;
-      margin-left: -2rem;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-      border: 1px solid #cccccc;
-      border-radius: 5px;
-      margin-top: 0.5rem;
-      p {
-        margin: 0;
-        color: black;
-        font-size: 1.3rem;
-      }
+const Profile = styled.div`
+  display: flex;
+  align-items: center;
+  position: relative;
+
+  .profileBox {
+    width: 8rem;
+    height: 5rem;
+    background: white;
+    position: absolute;
+    top: 100%;
+    margin-left: -2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    margin-top: 0.5rem;
+    p {
+      margin: 0;
+      color: black;
+      font-size: 1.3rem;
     }
+  }
+
+  svg {
+    width: 1.8rem;
+    height: 1.8rem;
   }
 
   .myProfile,
@@ -188,11 +215,5 @@ const NavSection = styled.div`
     width: 1.5rem;
   }
 `;
-
-const StyledSearchIcon = styled(FaSearch)`
-  width: 3rem;
-`;
-
-const StyledProfileIcon = styled(IoPersonSharp)``;
 
 export default Navbar;
