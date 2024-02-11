@@ -1,5 +1,6 @@
 import Navbar from "./Navbar";
 import SlidingMovies from "./Compunents/SlidingMovies";
+import MovieOptionsButton from "./Compunents/MovieOptionsButton";
 
 function App() {
   return (
@@ -7,6 +8,7 @@ function App() {
       <header className="App-header">
         <Navbar />
         <SlidingMovies />
+        <MovieOptionsButton />
       </header>
     </div>
   );
