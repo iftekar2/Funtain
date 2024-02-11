@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useState, useEffect } from "react";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 
-function Home({ fetchUrl }) {
+function Horror({ fetchUrl }) {
   const [slidingImages, setSlidingImage] = useState([]);
   const [slide, setSlide] = useState(0);
   const [error, setError] = useState(null);
@@ -11,10 +11,11 @@ function Home({ fetchUrl }) {
     const getSlidingImages = async () => {
       try {
         const response = await fetch(
-          `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_API_KEY}&with_genres=28`
+          `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_API_KEY}&with_genres=27`
         );
         const data = await response.json();
         const limitedResults = data.results.slice(0, 4);
+        console.log(limitedResults);
         setSlidingImage(limitedResults);
       } catch (error) {
         console.error("Error fetching data: ", error);
@@ -42,7 +43,7 @@ function Home({ fetchUrl }) {
   }
 
   return (
-    <HomePage>
+    <HorrorPage>
       <Images>
         <FaAngleLeft className="arrow arrow-left" onClick={goToPreviousSlide} />
         {slidingImages.map((movies, index) => (
@@ -51,7 +52,9 @@ function Home({ fetchUrl }) {
             className={index === slide ? "image" : "image-hide"}
           >
             <img
-              src={`https://image.tmdb.org/t/p/w500${movies.backdrop_path}`}
+              src={`https://image.tmdb.org/t/p/w500${
+                movies.backdrop_path ? movies.backdrop_path : movies.poster_path
+              }`}
               alt={movies.title}
             />
           </div>
@@ -67,11 +70,11 @@ function Home({ fetchUrl }) {
           ))}
         </Span>
       </Images>
-    </HomePage>
+    </HorrorPage>
   );
 }
 
-const HomePage = styled.div`
+const HorrorPage = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -141,4 +144,4 @@ const Span = styled.span`
   }
 `;
 
-export default Home;
+export default Horror;

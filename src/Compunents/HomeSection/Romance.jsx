@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useState, useEffect } from "react";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 
-function Home({ fetchUrl }) {
+function Romance({ fetchUrl }) {
   const [slidingImages, setSlidingImage] = useState([]);
   const [slide, setSlide] = useState(0);
   const [error, setError] = useState(null);
@@ -42,7 +42,7 @@ function Home({ fetchUrl }) {
   }
 
   return (
-    <HomePage>
+    <RomancePage>
       <Images>
         <FaAngleLeft className="arrow arrow-left" onClick={goToPreviousSlide} />
         {slidingImages.map((movies, index) => (
@@ -67,11 +67,11 @@ function Home({ fetchUrl }) {
           ))}
         </Span>
       </Images>
-    </HomePage>
+    </RomancePage>
   );
 }
 
-const HomePage = styled.div`
+const RomancePage = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -141,4 +141,4 @@ const Span = styled.span`
   }
 `;
 
-export default Home;
+export default Romance;

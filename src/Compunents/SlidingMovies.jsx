@@ -1,9 +1,9 @@
-import Home from "./Home";
+import Home from "./HomeSection/Trending";
 import styled from "styled-components";
-import Popular from "./Action";
-import Romance from "./Romance";
-import Animation from "./Animation";
-import Horror from "./Horror";
+import Popular from "./HomeSection/Action";
+import Romance from "./HomeSection/Romance";
+import Animation from "./HomeSection/Animation";
+import Horror from "./HomeSection/Horror";
 
 function SlidingMovies() {
   return (

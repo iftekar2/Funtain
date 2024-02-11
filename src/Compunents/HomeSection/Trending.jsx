@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useState, useEffect } from "react";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 
-function Home({ fetchUrl }) {
+function Trending({ fetchUrl }) {
   const [slidingImages, setSlidingImage] = useState([]);
   const [slide, setSlide] = useState(0);
   const [error, setError] = useState(null);
@@ -11,11 +11,10 @@ function Home({ fetchUrl }) {
     const getSlidingImages = async () => {
       try {
         const response = await fetch(
-          `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_API_KEY}&with_genres=27`
+          `https://api.themoviedb.org/3/trending/all/week?api_key=${process.env.REACT_APP_API_KEY}&language=end-US&page=1&pageSize=5`
         );
         const data = await response.json();
         const limitedResults = data.results.slice(0, 4);
-        console.log(limitedResults);
         setSlidingImage(limitedResults);
       } catch (error) {
         console.error("Error fetching data: ", error);
@@ -43,7 +42,7 @@ function Home({ fetchUrl }) {
   }
 
   return (
-    <HomePage>
+    <TrendingPage>
       <Images>
         <FaAngleLeft className="arrow arrow-left" onClick={goToPreviousSlide} />
         {slidingImages.map((movies, index) => (
@@ -52,9 +51,7 @@ function Home({ fetchUrl }) {
             className={index === slide ? "image" : "image-hide"}
           >
             <img
-              src={`https://image.tmdb.org/t/p/w500${
-                movies.backdrop_path ? movies.backdrop_path : movies.poster_path
-              }`}
+              src={`https://image.tmdb.org/t/p/w500${movies.backdrop_path}`}
               alt={movies.title}
             />
           </div>
@@ -70,11 +67,11 @@ function Home({ fetchUrl }) {
           ))}
         </Span>
       </Images>
-    </HomePage>
+    </TrendingPage>
   );
 }
 
-const HomePage = styled.div`
+const TrendingPage = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -144,4 +141,4 @@ const Span = styled.span`
   }
 `;
 
-export default Home;
+export default Trending;

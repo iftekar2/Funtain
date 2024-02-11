@@ -1,9 +1,8 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
-// import requists from "./APIRequist";
 
-function Home({ fetchUrl }) {
+function Animation({ fetchUrl }) {
   const [slidingImages, setSlidingImage] = useState([]);
   const [slide, setSlide] = useState(0);
   const [error, setError] = useState(null);
@@ -12,7 +11,7 @@ function Home({ fetchUrl }) {
     const getSlidingImages = async () => {
       try {
         const response = await fetch(
-          `https://api.themoviedb.org/3/trending/all/week?api_key=${process.env.REACT_APP_API_KEY}&language=end-US&page=1&pageSize=5`
+          `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_API_KEY}&with_genres=16`
         );
         const data = await response.json();
         const limitedResults = data.results.slice(0, 4);
@@ -43,7 +42,7 @@ function Home({ fetchUrl }) {
   }
 
   return (
-    <HomePage>
+    <AnimationPage>
       <Images>
         <FaAngleLeft className="arrow arrow-left" onClick={goToPreviousSlide} />
         {slidingImages.map((movies, index) => (
@@ -68,11 +67,11 @@ function Home({ fetchUrl }) {
           ))}
         </Span>
       </Images>
-    </HomePage>
+    </AnimationPage>
   );
 }
 
-const HomePage = styled.div`
+const AnimationPage = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -142,4 +141,4 @@ const Span = styled.span`
   }
 `;
 
-export default Home;
+export default Animation;
