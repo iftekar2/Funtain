@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
-// import requists from "./APIRequist";
 
 function Home({ fetchUrl }) {
   const [slidingImages, setSlidingImage] = useState([]);
@@ -12,10 +11,11 @@ function Home({ fetchUrl }) {
     const getSlidingImages = async () => {
       try {
         const response = await fetch(
-          `https://api.themoviedb.org/3/trending/all/week?api_key=${process.env.REACT_APP_API_KEY}&language=end-US&page=1&pageSize=5`
+          `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_API_KEY}&with_genres=27`
         );
         const data = await response.json();
         const limitedResults = data.results.slice(0, 4);
+        console.log(limitedResults);
         setSlidingImage(limitedResults);
       } catch (error) {
         console.error("Error fetching data: ", error);
@@ -52,7 +52,9 @@ function Home({ fetchUrl }) {
             className={index === slide ? "image" : "image-hide"}
           >
             <img
-              src={`https://image.tmdb.org/t/p/w500${movies.backdrop_path}`}
+              src={`https://image.tmdb.org/t/p/w500${
+                movies.backdrop_path ? movies.backdrop_path : movies.poster_path
+              }`}
               alt={movies.title}
             />
           </div>

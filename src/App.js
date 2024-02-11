@@ -1,12 +1,12 @@
 import Navbar from "./Navbar";
-import Home from "./Compunents/Home";
+import SlidingMovies from "./Compunents/SlidingMovies";
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
         <Navbar />
-        <Home />
+        <SlidingMovies />
       </header>
     </div>
   );

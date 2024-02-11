@@ -68,9 +68,6 @@ export const Navbar = () => {
             <li>
               <NavLink>New & Popular</NavLink>
             </li>
-            <li>
-              <NavLink>My List</NavLink>
-            </li>
           </ul>
         </NavComponents>
       </Navigation>
@@ -85,16 +82,11 @@ export const Navbar = () => {
           </SearchButton>
         </Search>
 
-        <Profile>
-          <ProfileButton>
-            <IoPersonSharp
-              className={
-                isAccountOpen ? "profileButtonOpen" : "profileButtonOff"
-              }
-              onClick={toggleAccount}
-            />
-          </ProfileButton>
-
+        <ProfileButton>
+          <IoPersonSharp
+            className={isAccountOpen ? "profileButtonOpen" : "profileButtonOff"}
+            onClick={toggleAccount}
+          />
           {isAccountOpen && (
             <ProfileBox>
               <div className="myProfile">
@@ -107,7 +99,7 @@ export const Navbar = () => {
               </div>
             </ProfileBox>
           )}
-        </Profile>
+        </ProfileButton>
       </SearchAndProfile>
     </NavPage>
   );
@@ -170,6 +162,7 @@ const Title = styled.div`
       display: flex;
       justify-content: center;
       align-items: center;
+      font-weight: 900;
     }
   }
 
@@ -272,6 +265,7 @@ const SearchAndProfile = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 1rem;
 
   .search {
     display: flex;
@@ -284,30 +278,27 @@ const SearchAndProfile = styled.div`
       display: none;
     }
   }
-
-  .profile {
-    margin-top: 7rem;
-  }
 `;
 
 const Search = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 1rem;
 `;
 
 const InputName = styled.input`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 2.3rem;
-  width: 17rem;
+  height: 2.5rem;
+  width: 18rem;
   font-size: 1.3rem;
   padding-left: 0.5rem;
   padding-top: 0;
   padding-bottom: 0;
   border-radius: 10px;
-  border: 1px solid black;
+  border: none;
 `;
 
 const SearchButton = styled.button`
@@ -329,19 +320,12 @@ const SearchButton = styled.button`
   }
 `;
 
-const Profile = styled.div`
-  margin-top: 7rem;
-`;
-
 const ProfileButton = styled.button`
   height: 2.5rem;
   width: 4.5rem;
   padding: 0;
   border: none;
   background: #fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   position: relative;
   cursor: pointer;
   border-radius: 10px;
@@ -354,7 +338,7 @@ const ProfileButton = styled.button`
   .profileButtonOff {
     height: 2rem;
     width: 2rem;
-    margin-top: -6.6rem;
+    // margin-top: -6.6rem;
   }
 `;
 
@@ -363,6 +347,7 @@ const ProfileBox = styled.div`
   border: 1px solid black;
   margin-left: -4.5rem;
   margin-top: 0.5rem;
+  background: #fff;
 
   .myProfile,
   .myList {
@@ -377,299 +362,3 @@ const ProfileBox = styled.div`
 `;
 
 export default Navbar;
-
-// function Navbar() {
-//   const [showNev, setShowNev] = useState(false);
-//   const transitionNavBar = () => {
-//     if (window.scrollY > 100) {
-//       setShowNev(true);
-//     } else {
-//       setShowNev(false);
-//     }
-//   };
-//   useEffect(() => {
-//     window.addEventListener("scroll", transitionNavBar);
-//     return () => window.removeEventListener("scroll", transitionNavBar);
-//   }, []);
-
-//   const [isSearchOpen, setIsSearchOpen] = useState(false);
-//   const toggleSearch = () => {
-//     setIsSearchOpen(!isSearchOpen);
-//     if (isAccountOpen) {
-//       setIsAccountOpen(false);
-//     }
-//   };
-
-//   const [isAccountOpen, setIsAccountOpen] = useState(false);
-//   const toggleAccount = () => {
-//     setIsAccountOpen(!isAccountOpen);
-//     if (isSearchOpen) {
-//       setIsSearchOpen(false);
-//     }
-//     // else if (burgerMenuVisible) {
-//     //   setBurgerMenuVisible(false);
-//     // }
-//   };
-
-//   // const [burgerMenuVisible, setBurgerMenuVisible] = useState(false);
-//   // const toggleBurgerMenu = () => {
-//   //   setBurgerMenuVisible(!burgerMenuVisible);
-//   //   if (isAccountOpen) {
-//   //     setIsAccountOpen(false);
-//   //   }
-//   // };
-
-//   return (
-//     <NavPage showNev={showNev}>
-//       <Navigation>
-//         <Title>
-//           <NavLink to="/">
-//             <h1>Funtain</h1>
-//           </NavLink>
-//         </Title>
-
-//         <NavComponents>
-//           <ul>
-//             <li>
-//               <NavLink>Home</NavLink>
-//             </li>
-//             <li>
-//               <NavLink>TV Shows</NavLink>
-//             </li>
-//             <li>
-//               <NavLink>Movies</NavLink>
-//             </li>
-//             <li>
-//               <NavLink>New & Popular</NavLink>
-//             </li>
-//             <li>
-//               <NavLink>My List</NavLink>
-//             </li>
-//           </ul>
-//         </NavComponents>
-//       </Navigation>
-
-//       <SearchAndProfile>
-//         <div className="search">
-//           {isSearchOpen && <InputName type="text" placeholder="Search....." />}
-//           <SearchButton>
-//             <FaSearch
-//               className={isSearchOpen ? "searchButtonOpen" : "searchButtonOff"}
-//               onClick={toggleSearch}
-//             />
-//           </SearchButton>
-//         </div>
-
-//         <div className="profile">
-//           <ProfileButton>
-//             <IoPersonSharp
-//               className={
-//                 isAccountOpen ? "profileButtonOpen" : "profileButtonOff"
-//               }
-//               onClick={toggleAccount}
-//             />
-//           </ProfileButton>
-
-//           {isAccountOpen && (
-//             <ProfileBox>
-//               <div className="myProfile">
-//                 <IoPersonSharp />
-//                 <p>Profile</p>
-//               </div>
-//               <div className="myList">
-//                 <TiHeartFullOutline />
-//                 <p>My List</p>
-//               </div>
-//             </ProfileBox>
-//           )}
-//         </div>
-
-//         <BurgerMenu>
-//           <Span />
-//           <Span />
-//           <Span />
-//         </BurgerMenu>
-//       </SearchAndProfile>
-//     </NavPage>
-//   );
-// }
-
-// const NavPage = styled.section`
-//   display: flex;
-//   justify-content: space-between;
-//   top: 0;
-//   width: 94%;
-//   height: 4rem;
-//   z-index: 1;
-//   position: fixed;
-//   background: ${(props) => (props.showNev ? "#ffffff" : "")};
-// `;
-
-// const Navigation = styled.div`
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   gap: 2rem;
-// `;
-
-// const Title = styled.div`
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   font-size: 1.5rem;
-
-//   h1 {
-//     margin: 0;
-//     cursor: pointer;
-//     color: #e0142f;
-//   }
-// `;
-
-// const NavComponents = styled.div`
-//   ul {
-//     font-weight: 500;
-//     cursor: pointer;
-
-//     a {
-//       color: black;
-//     }
-//   }
-
-//   @media (max-width: 1101px) {
-//     .navElements {
-//       display: flex;
-//       justify-content: center;
-//       align-items: center;
-
-//       ul {
-//         margin-top: 20rem;
-//         flex-direction: column;
-//         align-items: start;
-//         width: 20rem;
-//         height: 20rem;
-//         display: flex;
-//         justify-content: center;
-//         align-items: center;
-//         background: red;
-//       }
-//     }
-//   }
-// `;
-
-// const SearchAndProfile = styled.div`
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-
-//   .search {
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-//   }
-
-//   @media (max-width: 1101px) {
-//     .search {
-//       display: none;
-//     }
-//   }
-
-//   .profile {
-//     margin-top: 7rem;
-//   }
-// `;
-
-// const InputName = styled.input`
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   height: 2.3rem;
-//   width: 17rem;
-//   font-size: 1.3rem;
-//   padding-left: 0.5rem;
-//   padding-top: 0;
-//   padding-bottom: 0;
-//   border-radius: 10px;
-//   border: 1px solid black;
-// `;
-
-// const SearchButton = styled.button`
-//   height: 2.5rem;
-//   width: 4.5rem;
-//   padding: 0;
-//   border: none;
-//   background: #fff;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   cursor: pointer;
-//   border-radius: 10px;
-
-//   .searchButtonOpen,
-//   .searchButtonOff {
-//     height: 2rem;
-//     width: 2rem;
-//   }
-// `;
-
-// const ProfileButton = styled.button`
-//   height: 2.5rem;
-//   width: 4.5rem;
-//   padding: 0;
-//   border: none;
-//   background: #fff;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   position: relative;
-//   cursor: pointer;
-//   border-radius: 10px;
-
-//   .profileButtonOpen {
-//     height: 2rem;
-//     width: 2rem;
-//   }
-
-//   .profileButtonOff {
-//     height: 2rem;
-//     width: 2rem;
-//     margin-top: -6.6rem;
-//   }
-// `;
-
-// const ProfileBox = styled.div`
-//   width: 9rem;
-//   border: 1px solid black;
-//   margin-left: -4.5rem;
-//   margin-top: 0.5rem;
-
-//   .myProfile,
-//   .myList {
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-//     font-size: 1.5rem;
-//     height: 3rem;
-//     gap: 0.5rem;
-//     cursor: pointer;
-//   }
-// `;
-
-// const BurgerMenu = styled.div`
-//   @media (max-width: 1101px) {
-//     display: flex;
-//     flex-direction: column;
-//     gap: 0.5rem;
-//     cursor: pointer;
-//   }
-// `;
-
-// const Span = styled.div`
-//   @media (max-width: 1101px) {
-//     height: 5px;
-//     width: 35px;
-//     background: black;
-//     border-radius: 10px;
-//   }
-// `;
-
-// export default Navbar;
